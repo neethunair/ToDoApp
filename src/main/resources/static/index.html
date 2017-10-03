@@ -1,0 +1,42 @@
+<!doctype html>
+<html ng-app="todoApp">
+  <head>
+    <link rel="stylesheet" href="css/todo.css">
+    <link href="css/bootstrap.css" rel="stylesheet">
+  </head>
+  <body>
+    <h2>Todo</h2>
+    <div ng-controller="TodoListController as todoList">
+<!--     <button class="btn-primary"  ng-click="showAllTasks()">ShowAll</button> -->
+      <span>Pending Tasks = {{todoList.remaining()}}</span>
+
+      <ul class="unstyled">
+        <li ng-repeat="todo in todoList.todos">
+          <label class="checkbox">
+          	<input type="hidden" name="taskId" ng-model="taskId" value="{{todo.taskId}}"/>
+            <input type="checkbox" ng-model="todo.done" ng-click="showme=true">
+            <span class="done-{{todo.done}}">{{todo.text}}</span>
+            <p ng-hide="showme"></p>
+            <button ng-show="showme" class="btn-primary"  ng-click="DeleteTask()">Delete</button>
+            <button ng-show="showme" class="btn-primary"  ng-click="DoneTask()">Done</button>
+          </label>
+        </li>
+      </ul>
+      
+      
+      <form ng-submit="todoList.addTodo()">
+        <input name ="taskName" type="text" ng-model="taskName"  size="30"
+               placeholder="add new todo here">
+<!--         <input class="btn-primary" type="submit" value="add"> -->
+			<button class="btn-primary"  ng-click="AddTask()">Add</button>
+      </form>
+      
+      
+    </div>
+    <script src="js/jquery-1.7.1.min.js" type="text/javascript"></script>
+  <script src="js/angular.js" type="text/javascript"></script>
+<!--  <script src="js/todo.js"></script> -->
+<script src="js/task.js"></script>
+  </body>
+</html>
+
